@@ -1,1 +1,2 @@
 export const GET_STUDENTS = "GET_STUDENTS";
+export const SEARCH_STUDENT = "SEARCH_STUDENT";

@@ -1,7 +1,9 @@
-import { GET_STUDENTS } from "../actions/types.js";
+import { GET_STUDENTS, SEARCH_STUDENT } from "../actions/types.js";
 
 const initialState = {
-  students: []
+  students: [],
+  value: "",
+  result: []
 };
 
 export default function(state = initialState, action) {
@@ -10,6 +12,15 @@ export default function(state = initialState, action) {
       return {
         ...state,
         students: action.payload
+      };
+    case SEARCH_STUDENT:
+      const result = state.students.filter(val =>
+        val.name.toLowerCase().includes(action.payload.toLowerCase())
+      );
+      return {
+        ...state,
+        value: action.payload,
+        result: result
       };
     default:
       return state;

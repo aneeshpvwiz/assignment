@@ -6,7 +6,9 @@ import { getStudents } from "../../actions/students";
 export class StudentsList extends Component {
   static propTypes = {
     students: PropTypes.array.isRequired,
-    getStudents: PropTypes.func.isRequired
+    result: PropTypes.array.isRequired,
+    getStudents: PropTypes.func.isRequired,
+    value: PropTypes.string.isRequired
   };
 
   componentDidMount() {
@@ -14,35 +16,43 @@ export class StudentsList extends Component {
   }
 
   render() {
+    const data = this.props.value ? this.props.result : this.props.students;
+    console.log(this.props.students);
+
+    function totalMark(obj) {
+      return Object.keys(obj).reduce(
+        (sum, key) => sum + parseFloat(obj[key] || 0),
+        0
+      );
+    }
+
     return (
-      <div>
-        <h2>Students Detail</h2>
-        <table className="table table-striped">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Class</th>
-              <th>Class</th>
-              <th />
-            </tr>
-          </thead>
-          <tbody>
-            {this.props.students.map(student => (
-              <tr key={student.id}>
-                <td>{student.name}</td>
-                <td>{student.class}</td>
-                <td>{student.rollNo}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      <div className="container">
+        <main className="grid">
+          {data.map(student => (
+            <article key={student.rollNo}>
+              <img
+                src="https://picsum.photos/600/400?image=1083"
+                alt="student photo"
+              ></img>
+              <div className="text">
+                <h3>{student.name}</h3>
+                <p>Roll No:{student.rollNo}</p>
+                <p>Total{totalMark(student.marks)}</p>
+                <a href="#">Details</a>
+              </div>
+            </article>
+          ))}
+        </main>
       </div>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  students: state.students.students
+  students: state.students.students,
+  result: state.students.result,
+  value: state.students.value
 });
 
 export default connect(
