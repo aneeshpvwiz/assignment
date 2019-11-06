@@ -1,79 +1,89 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
 import PropTypes from "prop-types";
-import { searchStudent } from "../../actions/students";
-import { StudentsList } from "../students/StudentsList";
-import { getStudents } from "../../actions/students";
+import { searchStudent, getStudents } from "../../actions/students";
+
+import StudentsList from "../students/StudentsList";
 
 export class Search extends Component {
   constructor(props) {
     super(props);
-    this.state = { data: [], name: "Aneesh" };
-    //this.handleChange = this.handleChange.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.toggleSortName = this.toggleSortName.bind(this);
+    this.state = { sortAscending: false };
   }
-
   static propTypes = {
-    result: PropTypes.array.isRequired,
-    students: PropTypes.array.isRequired,
     searchStudent: PropTypes.func.isRequired,
+    value: PropTypes.string.isRequired,
+    students: PropTypes.array.isRequired,
+    result: PropTypes.array.isRequired,
     getStudents: PropTypes.func.isRequired
   };
 
-  static getDerivedStateFromProps(props) {
-    return {
-      data: props.students
-    };
+  toggleSortName() {
+    this.setState({
+      sortAscending: !this.state.sortAscending
+    });
+    if (this.state.sortAscending) {
+      this.props.students.sort(function(a, b) {
+        var textA = a.name.toUpperCase();
+        var textB = b.name.toUpperCase();
+        return textA < textB ? -1 : textA > textB ? 1 : 0;
+      });
+    } else {
+      this.props.students.sort(function(a, b) {
+        var textA = a.name.toUpperCase();
+        var textB = b.name.toUpperCase();
+        return textA > textB ? -1 : textA < textB ? 1 : 0;
+      });
+    }
   }
 
-  handleChange = e => {
-    //this.props.searchStudent(e.target.value);
-  };
+  handleChange(e) {
+    this.props.searchStudent(e.target.value);
+  }
 
   componentDidMount() {
     this.props.getStudents();
   }
 
   render() {
-    console.log(this.state.name);
-    const { value } = this.props.value;
-
+    const value = this.props.value;
+    const data = this.props.value ? this.props.result : this.props.students;
+    console.log(this.state.sortAscending);
     return (
-      <div>
-        <div className="header">
-          <a href="#default" className="logo">
-            StudentsRoom
-          </a>
-          <div className="header-right">
+      <Fragment>
+        <div>
+          <a href="#default">StudentsRoom</a>
+          <div>
             <input
-              className="form-control"
               placeholder="Search"
-              //onChange={e => searchStudent(e.target.value)}
               onChange={this.handleChange}
               value={value}
             />
+            <button onClick={this.toggleSortName}>SortName</button>
           </div>
         </div>
 
-        {this.state.data.map(student => {
+        {data.map(student => {
           return (
             <StudentsList
               key={student.rollNo}
               name={student.name}
-              marks={student.marks}
               rollNo={student.rollNo}
+              marks={student.marks}
             />
           );
         })}
-      </div>
+      </Fragment>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  result: state.students.result,
+  value: state.students.value,
   students: state.students.students,
-  value: state.students.value
+  result: state.students.result
 });
 
 export default connect(
