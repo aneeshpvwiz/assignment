@@ -2,8 +2,8 @@ import { GET_STUDENTS, SEARCH_STUDENT } from "../actions/types.js";
 
 const initialState = {
   students: [],
-  value: "",
-  result: []
+  result: [],
+  value: ""
 };
 
 export default function(state = initialState, action) {
@@ -11,16 +11,16 @@ export default function(state = initialState, action) {
     case GET_STUDENTS:
       return {
         ...state,
-        students: action.payload
+        students: action.payload,
+        result: action.payload
       };
     case SEARCH_STUDENT:
-      const result = state.students.filter(val =>
-        val.name.toLowerCase().includes(action.payload.toLowerCase())
-      );
       return {
         ...state,
         value: action.payload,
-        result: result
+        result: state.students.filter(val =>
+          val.name.toLowerCase().includes(action.payload.toLowerCase())
+        )
       };
     default:
       return state;

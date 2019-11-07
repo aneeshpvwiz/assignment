@@ -25,16 +25,16 @@ export class Search extends Component {
       sortAscending: !this.state.sortAscending
     });
     if (this.state.sortAscending) {
-      this.props.students.sort(function(a, b) {
-        var textA = a.name.toUpperCase();
-        var textB = b.name.toUpperCase();
-        return textA < textB ? -1 : textA > textB ? 1 : 0;
-      });
-    } else {
-      this.props.students.sort(function(a, b) {
+      this.props.result.sort(function(a, b) {
         var textA = a.name.toUpperCase();
         var textB = b.name.toUpperCase();
         return textA > textB ? -1 : textA < textB ? 1 : 0;
+      });
+    } else {
+      this.props.result.sort(function(a, b) {
+        var textA = a.name.toUpperCase();
+        var textB = b.name.toUpperCase();
+        return textA < textB ? -1 : textA > textB ? 1 : 0;
       });
     }
   }
@@ -49,8 +49,8 @@ export class Search extends Component {
 
   render() {
     const value = this.props.value;
-    const data = this.props.value ? this.props.result : this.props.students;
-    console.log(this.state.sortAscending);
+    //const data = this.props.value ? this.props.result : this.props.students;
+    const data = this.props.result;
     return (
       <Fragment>
         <div>
