@@ -12,6 +12,12 @@ export class StudentContainer extends Component {
   }
 
   render() {
+    function totalMark(obj) {
+      return Object.keys(obj).reduce(
+        (sum, key) => sum + parseFloat(obj[key] || 0),
+        0
+      );
+    }
     const students = this.props.studentsList;
     return (
       <StudentList>
@@ -20,7 +26,7 @@ export class StudentContainer extends Component {
             key={student.rollNo}
             name={student.name}
             rollNo={student.rollNo}
-            marks={student.marks}
+            totalmark={totalMark(student.marks)}
           />
         ))}
       </StudentList>
@@ -32,7 +38,8 @@ StudentContainer.propTypes = {
   studentsList: PropTypes.arrayOf(
     PropTypes.shape({
       rollNo: PropTypes.string.isRequired,
-      name: PropTypes.number.isRequired
+      name: PropTypes.number.isRequired,
+      marks: PropTypes.array.isRequired
     })
   ).isRequired
 };

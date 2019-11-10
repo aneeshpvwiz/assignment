@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import "../../static/students.css";
 
-const Student = ({ name, rollNo, marks }) => (
+const Student = ({ name, rollNo, totalmark }) => (
   <main className="grid">
     <article>
       <img
@@ -14,7 +14,7 @@ const Student = ({ name, rollNo, marks }) => (
       <div className="text">
         <h3>Name:{name}</h3>
         <p>Roll No:{rollNo}</p>
-        <p>Total Marks:{marks}</p>
+        <p>Total Marks:{totalmark}</p>
       </div>
     </article>
   </main>
@@ -23,7 +23,7 @@ const Student = ({ name, rollNo, marks }) => (
 Student.propTypes = {
   name: PropTypes.string.isRequired,
   rollNo: PropTypes.number.isRequired,
-  marks: PropTypes.array.isRequired
+  totalmark: PropTypes.number.isRequired
 };
 
 export default Student;
