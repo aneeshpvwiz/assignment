@@ -28,14 +28,17 @@
   color: black;
 }
 
-.header a.active {
-  background-color: dodgerblue;
-  color: white;
-}
-
 .header-right {
   float: right;
-  padding: 20px;
+  padding: 10px;
+}
+
+.header input[type="text"] {
+  width: 200px;
+  padding: 6px;
+  border: none;
+  margin-right: 16px;
+  font-size: 17px;
 }
 
 @media screen and (max-width: 500px) {
@@ -53,13 +56,10 @@
   }
 }
 
-body {
-  padding: 40px 0;
-}
-
 .grid {
+  margin-top: 50px;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(373px, 1fr));
   grid-gap: 20px;
   align-items: stretch;
 }
@@ -70,9 +70,62 @@ body {
 }
 
 .grid > article img {
-  max-width: 100%;
+  margin-left: 75px;
 }
 
 .grid .text {
-  padding: 20px;
+  text-align: center;
+}
+
+@media screen and (max-width: 500px) {
+  .grid > article img {
+    margin-left: 5px;
+  }
+
+  .grid .text {
+    margin-left: -100px;
+  }
+}
+
+.form-inline {
+  margin-top: 100px;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  width: 100%;
+}
+
+.form-inline label {
+  margin: 5px 10px 5px 0;
+}
+
+.form-inline input {
+  vertical-align: middle;
+  margin: 5px 10px 5px 0;
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+}
+
+.form-inline button {
+  padding: 10px 20px;
+  background-color: dodgerblue;
+  border: 1px solid #ddd;
+  color: white;
+  cursor: pointer;
+}
+
+.form-inline button:hover {
+  background-color: royalblue;
+}
+
+@media (max-width: 800px) {
+  .form-inline input {
+    margin: 10px 0;
+  }
+
+  .form-inline {
+    flex-direction: column;
+    align-items: stretch;
+  }
 }

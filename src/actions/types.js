@@ -1,2 +1,6 @@
 export const GET_STUDENTS = "GET_STUDENTS";
 export const SEARCH_STUDENT = "SEARCH_STUDENT";
+export const SORT_STUDENT = "SORT_STUDENT";
+export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
+export const LOGIN_FAIL = "LOGIN_FAIL";
+export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";

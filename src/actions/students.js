@@ -1,8 +1,8 @@
 import axios from "axios";
 
-import { GET_STUDENTS, SEARCH_STUDENT } from "./types";
+import { GET_STUDENTS, SEARCH_STUDENT, SORT_STUDENT } from "./types";
 
-// GET STUDENTS
+// Get Student List
 export const getStudents = () => (dispatch, getState) => {
   axios
     .get(`https://api.myjson.com/bins/1dlper/`)
@@ -19,7 +19,14 @@ export const getStudents = () => (dispatch, getState) => {
     );
 };
 
-//SEARCH STUDENTS
+//Live search action
 export function searchStudent(value) {
   return { type: SEARCH_STUDENT, payload: value };
+}
+
+//Sort students by name
+
+//Live search action
+export function sortStudents() {
+  return { type: SORT_STUDENT };
 }

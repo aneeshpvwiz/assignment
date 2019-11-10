@@ -1,14 +1,6 @@
-import React, { Component, Fragment } from "react";
-
-export class Sort extends Component {
-  render() {
-    //console.log(this.props.students);
-    return (
-      <Fragment>
-        <h1></h1>
-      </Fragment>
-    );
-  }
+import React, { Component } from "react";
+function Sort(props) {
+  return <button onClick={props.onClick}>Sort by Name</button>;
 }
 
 export default Sort;
